@@ -7,6 +7,18 @@
   
   Each constructor function has unique properties and methods that are defined in their block comments below:
 */
+
+function pause(numberMillis) { 
+  var now = new Date(); 
+  var exitTime = now.getTime() + numberMillis; 
+  while (true) { 
+      now = new Date(); 
+      if (now.getTime() > exitTime) 
+          return; 
+  } 
+} 
+
+
 console.log(`\n\n\n\n*** Prototype *** \n\n\n\n`)
 
 function GameObject(attributes) {                      // === GameObject ===
@@ -61,13 +73,18 @@ function Villain(attributes) {
 Villain.prototype = Object.create(Humanoid.prototype);
 
 Villain.prototype.cuts = function() {
+  console.log(`\n`);
+  if (swordsman.healthPoints < 1) {
+    console.log(`The Swordsman is dead and can't fight!\nThe Swordsman lost the fight!`);
+    throw new Error("Swordsman is dead");
+  }
   let hit = Math.floor(Math.random() * 10);
   if (hit < 2) {
-    return `You missed everyone!`;
+    return `The Swordsman missed everyone!`;
   } else if (hit < 6) {
     let deathPoints = Math.floor(Math.random() * 10);
     mage.healthPoints -= deathPoints;
-    console.log(`You hit the Mage and scored ${deathPoints} points of damage, the mage has ${mage.healthPoints} health points left`);
+    console.log(`The Swordsman hit the Mage and scored ${deathPoints} points of damage, the mage has ${mage.healthPoints} health points left`);
     if (mage.healthPoints < 1) {
       return `The mage is dead!`;
     }else {
@@ -76,7 +93,7 @@ Villain.prototype.cuts = function() {
   } else {
     let deathPoints = Math.floor(Math.random() * 10);
     archer.healthPoints -= deathPoints;
-    console.log(`You hit the Archer and scored ${deathPoints} points of damage, the archer has ${archer.healthPoints} health points left`);
+    console.log(`The Swordsman hit the Archer and scored ${deathPoints} points of damage, the archer has ${archer.healthPoints} health points left`);
     if (archer.healthPoints < 1) {
       return `The mage is dead!`;
     } else {
@@ -92,20 +109,46 @@ function Hero(attributes) {
 
 Hero.prototype = Object.create(Humanoid.prototype);
 
-Hero.prototype.slash = function() {
-  swordsman.healthPoints -= 2;
-  return `points: ${this.healthPoints} and ${swordsman.healthPoints}`;
-}
-
-Hero.prototype.shots = function() {
-  swordsman.healthPoints -= 4;
-  return `points: ${this.healthPoints} and ${swordsman.healthPoints}`;
-}
-
 Hero.prototype.stabs = function() {
-  swordsman.healthPoints -= 3;
-  return `points: ${this.healthPoints} and ${swordsman.healthPoints}`;
+  console.log(`\n`);
+  if (archer.healthPoints < 1) {
+    return `The Archer is dead and can't fight!`;
+  }
+  let hit = Math.floor(Math.random() * 10);
+  if (hit < 5) {
+    return `The Archor missed the Swordsman!`;
+  } else {
+    let deathPoints = Math.floor(Math.random() * 10);
+    swordsman.healthPoints -= deathPoints;
+    console.log(`The Archor hit the Swordsman and scored ${deathPoints} points of damage, the Swordsman has ${swordsman.healthPoints} health points left`);
+    if (swordsman.healthPoints < 1) {
+      return `The Swordsman is dead!`;
+    }else {
+      return `You didn't get him yet!!!`
+    };
+  } 
 }
+
+Hero.prototype.slashes = function() {
+  console.log(`\n`);
+  if (mage.healthPoints < 1) {
+    return `The Mage is dead and can't fight!`;
+  }
+  let hit = Math.floor(Math.random() * 10);
+  if (hit < 5) {
+    return `The Mage missed the Swordsman!`;
+  } else {
+    let deathPoints = Math.floor(Math.random() * 10);
+    swordsman.healthPoints -= deathPoints;
+    console.log(`The Mage hit the Swordsman and scored ${deathPoints} points of damage, the Swordsman has ${swordsman.healthPoints} health points left`);
+    if (swordsman.healthPoints < 1) {
+      return `The Swordsman is dead!`;
+    }else {
+      return `You didn't get him yet!!!`
+    };
+  } 
+}
+
 
 
 
@@ -120,7 +163,7 @@ Hero.prototype.stabs = function() {
       width: 1,
       height: 1,
     },
-    healthPoints: 5,
+    healthPoints: 70,
     name: 'Bruce',
     team: 'Mage Guild',
     weapons: [
@@ -153,7 +196,7 @@ Hero.prototype.stabs = function() {
       width: 2,
       height: 4,
     },
-    healthPoints: 5,
+    healthPoints: 70,
     name: 'Lilith',
     team: 'Forest Kingdom',
     weapons: [
@@ -174,6 +217,43 @@ Hero.prototype.stabs = function() {
 // console.log(mage.takeDamage()); // Bruce took damage.
 // console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 console.log(swordsman.cuts());
+pause(3000);
+console.log(archer.stabs());
+pause(3000);
+console.log(mage.slashes());
+console.log(swordsman.cuts());
+pause(3000);
+console.log(archer.stabs());
+pause(3000);
+console.log(mage.slashes());
+console.log(swordsman.cuts());
+pause(3000);
+console.log(archer.stabs());
+pause(3000);
+console.log(mage.slashes());
+console.log(swordsman.cuts());
+pause(3000);
+console.log(archer.stabs());
+pause(3000);
+console.log(mage.slashes());
+console.log(swordsman.cuts());
+pause(3000);
+console.log(archer.stabs());
+pause(3000);
+console.log(mage.slashes());
+console.log(swordsman.cuts());
+pause(3000);
+console.log(archer.stabs());
+pause(3000);
+console.log(mage.slashes());
+console.log(swordsman.cuts());
+pause(3000);
+console.log(archer.stabs());
+pause(3000);
+console.log(mage.slashes());
+console.log(swordsman.cuts());
+pause(3000);
+console.log(archer.stabs());
+pause(3000);
+console.log(mage.slashes());
 
-
-  
