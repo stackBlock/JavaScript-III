@@ -7,7 +7,7 @@
   
   Each constructor function has unique properties and methods that are defined in their block comments below:
 */
-
+console.log(`\n\n\n\n*** Prototype *** \n\n\n\n`)
 
 function GameObject(attributes) {                      // === GameObject ===
   this.createdAt = attributes.createdAt;              // createdAt
@@ -32,8 +32,6 @@ CharacterStats.prototype.takeDamage = function() {
 }
 
 
-
-
 function Humanoid(attributes) {                       // === Humanoid (Having an appearance or character resembling that of a human.) ===
   CharacterStats.call(this, attributes);              // Instances of Humanoid should have all of the same properties as GameObject and CharacterStats.
   this.team = attributes.team;                        // team
@@ -43,22 +41,79 @@ function Humanoid(attributes) {                       // === Humanoid (Having an
 
 Humanoid.prototype = Object.create(CharacterStats.prototype);           // should inherit destroy() from GameObject through CharacterStats
                                                                         // should inherit takeDamage() from CharacterStats
-
 Humanoid.prototype.greet = function() {
   return `${this.name} offers a greeting in ${this.language}.`;       // greet() // prototype method -> returns the string '<object name> offers a greeting in <object language>.'
 }
 
-
-
- 
-
 // DONE - Inheritance chain: GameObject -> CharacterStats -> Humanoid
+
+
+// Stretch task: 
+  // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
+  // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
+  // * Create two new objects, one a villain and one a hero and fight it out with methods!
+
+
+function Villain(attributes) {
+  Humanoid.call(this, attributes);
+}
+
+Villain.prototype = Object.create(Humanoid.prototype);
+
+Villain.prototype.cuts = function() {
+  let hit = Math.floor(Math.random() * 10);
+  if (hit < 2) {
+    return `You missed everyone!`;
+  } else if (hit < 6) {
+    let deathPoints = Math.floor(Math.random() * 10);
+    mage.healthPoints -= deathPoints;
+    console.log(`You hit the Mage and scored ${deathPoints} points of damage, the mage has ${mage.healthPoints} health points left`);
+    if (mage.healthPoints < 1) {
+      return `The mage is dead!`;
+    }else {
+      return `Now there coming after you!!!`
+    };
+  } else {
+    let deathPoints = Math.floor(Math.random() * 10);
+    archer.healthPoints -= deathPoints;
+    console.log(`You hit the Archer and scored ${deathPoints} points of damage, the archer has ${archer.healthPoints} health points left`);
+    if (archer.healthPoints < 1) {
+      return `The mage is dead!`;
+    } else {
+      return `Now there coming after you!!!`;
+    };
+  }
+}
+
+
+function Hero(attributes) {
+  Humanoid.call(this, attributes);
+}
+
+Hero.prototype = Object.create(Humanoid.prototype);
+
+Hero.prototype.slash = function() {
+  swordsman.healthPoints -= 2;
+  return `points: ${this.healthPoints} and ${swordsman.healthPoints}`;
+}
+
+Hero.prototype.shots = function() {
+  swordsman.healthPoints -= 4;
+  return `points: ${this.healthPoints} and ${swordsman.healthPoints}`;
+}
+
+Hero.prototype.stabs = function() {
+  swordsman.healthPoints -= 3;
+  return `points: ${this.healthPoints} and ${swordsman.healthPoints}`;
+}
+
+
 
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
 
-  const mage = new Humanoid({
+  const mage = new Hero({
     createdAt: new Date(),
     dimensions: {
       length: 2,
@@ -74,7 +129,7 @@ Humanoid.prototype.greet = function() {
     language: 'Common Tongue',
   });
 
-  const swordsman = new Humanoid({
+  const swordsman = new Villain({
     createdAt: new Date(),
     dimensions: {
       length: 2,
@@ -91,14 +146,14 @@ Humanoid.prototype.greet = function() {
     language: 'Common Tongue',
   });
 
-  const archer = new Humanoid({
+  const archer = new Hero({
     createdAt: new Date(),
     dimensions: {
       length: 1,
       width: 2,
       height: 4,
     },
-    healthPoints: 10,
+    healthPoints: 5,
     name: 'Lilith',
     team: 'Forest Kingdom',
     weapons: [
@@ -108,19 +163,17 @@ Humanoid.prototype.greet = function() {
     language: 'Elvish',
   });
   
-console.log(mage.createdAt); // Today's date
-console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
-console.log(swordsman.healthPoints); // 15
-console.log(mage.name); // Bruce
-console.log(swordsman.team); // The Round Table
-console.log(mage.weapons); // Staff of Shamalama
-console.log(archer.language); // Elvish
-console.log(archer.greet()); // Lilith offers a greeting in Elvish.
-console.log(mage.takeDamage()); // Bruce took damage.
-console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
+// console.log(mage.createdAt); // Today's date
+// console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
+// console.log(swordsman.healthPoints); // 15
+// console.log(mage.name); // Bruce
+// console.log(swordsman.team); // The Round Table
+// console.log(mage.weapons); // Staff of Shamalama
+// console.log(archer.language); // Elvish
+// console.log(archer.greet()); // Lilith offers a greeting in Elvish.
+// console.log(mage.takeDamage()); // Bruce took damage.
+// console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
+console.log(swordsman.cuts());
 
 
-  // Stretch task: 
-  // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
-  // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
-  // * Create two new objects, one a villain and one a hero and fight it out with methods!
+  
