@@ -21,7 +21,7 @@ function pause(numberMillis) {
 
 console.log(`\n\n\n\n*** Prototype *** \n\n\n\n`)
 
-function GameObject(attributes) {                      // === GameObject ===
+function GameObject(attributes) {                     // === GameObject ===
   this.createdAt = attributes.createdAt;              // createdAt
   this.name = attributes.name;                        // name
   this.dimensions = attributes.dimensions;            // dimensions (These represent the character's size in the video game)
@@ -150,9 +150,6 @@ Hero.prototype.slashes = function() {
 }
 
 
-
-
-
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
 
@@ -217,43 +214,43 @@ Hero.prototype.slashes = function() {
 // console.log(mage.takeDamage()); // Bruce took damage.
 // console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 console.log(swordsman.cuts());
-pause(3000);
+pause(4000);
 console.log(archer.stabs());
-pause(3000);
+pause(4000);
 console.log(mage.slashes());
 console.log(swordsman.cuts());
-pause(3000);
+pause(4000);
 console.log(archer.stabs());
-pause(3000);
+pause(4000);
 console.log(mage.slashes());
 console.log(swordsman.cuts());
-pause(3000);
+pause(4000);
 console.log(archer.stabs());
-pause(3000);
+pause(4000);
 console.log(mage.slashes());
 console.log(swordsman.cuts());
-pause(3000);
+pause(4000);
 console.log(archer.stabs());
-pause(3000);
+pause(4000);
 console.log(mage.slashes());
 console.log(swordsman.cuts());
-pause(3000);
+pause(4000);
 console.log(archer.stabs());
-pause(3000);
+pause(4000);
 console.log(mage.slashes());
 console.log(swordsman.cuts());
-pause(3000);
+pause(4000);
 console.log(archer.stabs());
-pause(3000);
+pause(4000);
 console.log(mage.slashes());
 console.log(swordsman.cuts());
-pause(3000);
+pause(4000);
 console.log(archer.stabs());
-pause(3000);
+pause(4000);
 console.log(mage.slashes());
 console.log(swordsman.cuts());
-pause(3000);
+pause(4000);
 console.log(archer.stabs());
-pause(3000);
+pause(4000);
 console.log(mage.slashes());
 
